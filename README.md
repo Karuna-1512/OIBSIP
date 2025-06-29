@@ -42,4 +42,3 @@ Create a responsive and visually appealing landing page using HTML and CSS.
 
 ## 📸 Screenshot
 
-*You can add a screenshot of your page here later.*
