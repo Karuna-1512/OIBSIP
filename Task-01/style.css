@@ -1,33 +1,72 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f8f9fa;
-    color: #333;
-    text-align: center;
-}
+ body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background: #f5f6f5;
+            color: #2b2d42;
+            text-align: center;
+            line-height: 1.6;
+        }
 
-header {
-    background: #4e54c8;
-    color: white;
-    padding: 50px 20px;
-}
+        header {
+            background: linear-gradient(135deg, #2b2d42 0%, #4e54c8 100%);
+            color: #ffffff;
+            padding: 80px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-.btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 25px;
-    background-color: #ff7f50;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-}
+        header h1 {
+            font-size: 2.8em;
+            margin: 0;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
 
-section {
-    padding: 40px 20px;
-}
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin: 10px 0 20px;
+        }
 
-footer {
-    background: #222;
-    color: white;
-    padding: 15px;
-}
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 14px 30px;
+            background-color: #d90429;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #ef233c;
+            transform: translateY(-2px);
+        }
+
+        section {
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2em;
+            font-weight: 400;
+            color: #2b2d42;
+            margin-bottom: 20px;
+        }
+
+        section p {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 20px;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
+        }
