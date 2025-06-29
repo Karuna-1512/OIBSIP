@@ -42,3 +42,10 @@ Create a responsive and visually appealing landing page using HTML and CSS.
 
 ## 📸 Screenshot
 
+🙏 Acknowledgements
+
+A special thanks to Oasis Infobyte and AICTE for providing this opportunity to elevate my web development skills.
+
+
+
+GitHub Repository: OIBSIP
