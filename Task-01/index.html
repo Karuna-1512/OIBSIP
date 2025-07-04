@@ -1,25 +1,191 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
-     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400&display=swap">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VPN Landing Page - Task 1</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <h1>Elegance in Design</h1>
-        <p>A meticulously crafted and responsive web experience by Karuna, showcasing timeless sophistication.</p>
-        <a href="#learn-more" class="btn">Explore More</a>
-    </header>
+  <nav>
+    <div class="nav-container">
+      <div class="logo">SecureVPN</div>
+      <div class="nav-links">
+        <a href="#why-choose">Why Choose Us</a>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#global-coverage">Global Coverage</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
 
-    <section id="learn-more">
-        <h2>About This Creation</h2>
-        <p>This distinguished landing page, developed with precision using HTML and CSS, represents a pinnacle of modern web craftsmanship. Created as part of an internship with Oasis Infobyte, it embodies elegance and functionality in equal measure.</p>
-    </section>
+  <header class="hero" id="signup">
+    <h1 aria-label="Secure VPN that just works">The VPN That Just Works</h1>
+    <p>Protect your online activity with fast, reliable, and secure VPN services. Stay safe on public Wi-Fi, stream without restrictions, and browse privately.</p>
+    <div class="cta-form">
+      <input type="email" placeholder="Enter your email" aria-label="Email input for VPN signup" required>
+      <button type="submit" aria-label="Sign up for VPN">Get Started</button>
+    </div>
+  </header>
 
-    <footer>
-        <p>© 2025 Karuna. All Rights Reserved.</p>
-    </footer>
+  <section class="why-choose" id="why-choose">
+    <h2>Why Choose SecureVPN?</h2>
+    <p>SecureVPN offers unmatched privacy, speed, and ease of use, trusted by millions worldwide.</p>
+    <div class="why-items">
+      <div class="why-item">
+        <img src="https://cdn-icons-png.flaticon.com/128/3064/3064216.png" alt="Protection Icon" />
+        <h3>Top-Tier Security</h3>
+        <p>Advanced encryption ensures your data stays private, even on unsecured networks.</p>
+      </div>
+      <div class="why-item">
+        <img src="https://cdn-icons-png.flaticon.com/128/3208/3208716.png" alt="Seamless Icon" />
+        <h3>Seamless Experience</h3>
+        <p>Connect instantly from anywhere with our user-friendly interface.</p>
+      </div>
+      <div class="why-item">
+        <img src="https://cdn-icons-png.flaticon.com/128/2751/2751083.png" alt="Speed Icon" />
+        <h3>Blazing Fast Speeds</h3>
+        <p>Enjoy high-speed connections with our optimized global servers.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <h2>Our Key Features</h2>
+    <div class="feature">
+      <img src="https://cdn-icons-png.flaticon.com/128/3064/3064197.png" alt="Secure Access Icon" />
+      <h3>Global Access</h3>
+      <p>Connect securely from anywhere with servers in 94 countries, giving you control over your online presence.</p>
+    </div>
+    <div class="feature">
+      <img src="https://cdn-icons-png.flaticon.com/128/1828/1828940.png" alt="Safe Internet Icon" />
+      <h3>Instant Privacy</h3>
+      <p>One-click encryption protects your data on any device, keeping your information secure.</p>
+    </div>
+    <div class="feature">
+      <img src="https://cdn-icons-png.flaticon.com/128/1532/1532886.png" alt="Multi-Device Icon" />
+      <h3>All Devices</h3>
+      <p>Supports phones, laptops, tablets, and routers for a seamless experience across platforms.</p>
+    </div>
+    <div class="feature">
+      <img src="https://cdn-icons-png.flaticon.com/128/616/616430.png" alt="No Logs Icon" />
+      <h3>No-Logs Policy</h3>
+      <p>We don’t track or store your browsing activity, ensuring complete privacy.</p>
+    </div>
+  </section>
+
+  <section class="how-it-works" id="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>Step 1: Sign Up</h3>
+        <p>Create an account with your email and choose a plan that suits you.</p>
+      </div>
+      <div class="step">
+        <h3>Step 2: Download</h3>
+        <p>Install our app on your device—available for all major platforms.</p>
+      </div>
+      <div class="step">
+        <h3>Step 3: Connect</h3>
+        <p>Choose a server and connect with one click to enjoy secure browsing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="global-coverage" id="global-coverage">
+    <h2>Global Server Coverage</h2>
+    <p>Access our extensive network of servers across the globe for unrestricted browsing.</p>
+    <div class="coverage-stats">
+      <div class="stat">
+        <h3>94+</h3>
+        <p>Countries</p>
+      </div>
+      <div class="stat">
+        <h3>2000+</h3>
+        <p>Servers</p>
+      </div>
+      <div class="stat">
+        <h3>10 Gbps</h3>
+        <p>Server Speed</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials" id="testimonials">
+    <h2>What Our Users Say</h2>
+    <div class="testimonial">
+      <p>"SecureVPN is incredibly easy to use and keeps my data safe on public Wi-Fi."</p>
+      <cite>- Alex, Freelancer</cite>
+    </div>
+    <div class="testimonial">
+      <p>"The speed is amazing, and I can stream without any buffering issues."</p>
+      <cite>- Priya, Student</cite>
+    </div>
+    <div class="testimonial">
+      <p>"Great customer support and reliable connections. Highly recommend!"</p>
+      <cite>- Raj, Entrepreneur</cite>
+    </div>
+  </section>
+
+  <section class="pricing" id="pricing">
+    <h2>Choose Your Plan</h2>
+    <div class="plan">
+      <h3>Basic</h3>
+      <p class="price"> ₹420/mo</p>
+      <p>1 Device, Standard Speed, Basic Support</p>
+      <button aria-label="Select Basic Plan">Choose Plan</button>
+    </div>
+    <div class="plan">
+      <h3>Premium</h3>
+      <p class="price">₹550/mo</p>
+      <p>5 Devices, High Speed, Priority Support</p>
+      <button aria-label="Select Premium Plan">Choose Plan</button>
+    </div>
+    <div class="plan">
+      <h3>Family</h3>
+      <p class="price"> ₹1300/mo</p>
+      <p>10 Devices, Ultra Speed, 24/7 Support</p>
+      <button aria-label="Select Family Plan">Choose Plan</button>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3>What is a VPN?</h3>
+      <p>A VPN encrypts your internet connection, ensuring privacy and security while browsing.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Is it easy to use?</h3>
+      <p>Yes, our one-click connection makes it simple to secure your device instantly.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Will it slow my internet?</h3>
+      <p>Our optimized servers ensure minimal impact on your connection speed.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Can I use it for streaming?</h3>
+      <p>Absolutely, access geo-restricted content with our high-speed servers.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Is my data safe?</h3>
+      <p>With our no-logs policy and military-grade encryption, your data is fully protected.</p>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <p>Have questions or need assistance? Our support team is here to help.</p>
+    <p>Email: <a href="mailto:support@securevpn.com" aria-label="Email support">support@securevpn.com</a></p>
+    <p>Phone: <a href="tel:+91-800-555-1234" aria-label="Call support">+91-800-555-1234</a></p>
+  </section>
+
+  <footer>
+    <p>© 2025 SecureVPN. All rights reserved.</p>
+  </footer>
 </body>
 </html>
