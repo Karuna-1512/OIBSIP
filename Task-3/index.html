@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Temperature Converter</title>
+  <style>
+    :root {
+      --bg: #f2f2f2;
+      --fg: #333;
+      --card-bg: #fff;
+      --border: #ccc;
+      --btn-bg: #4CAF50;
+      --btn-hover: #45a049;
+      --clear-bg: #f44336;
+      --clear-hover: #da190b;
+    }
+    .dark {
+      --bg: #1a1a1a;
+      --fg: #f2f2f2;
+      --card-bg: #333;
+      --border: #666;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+       padding-top:50px;
+    }
+    .converter {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 300px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    input, select, button {
+      padding: 8px;
+      margin: 6px 0;
+      width: 100%;
+      font-size: 14px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+    .dark input, .dark select { background: #444; color: var(--fg); }
+    button {
+      background: var(--btn-bg);
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover { background: var(--btn-hover); }
+    .clear-btn { background: var(--clear-bg); }
+    .clear-btn:hover { background: var(--clear-hover); }
+
+    .theme-toggle {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      padding: 4px 8px;
+      font-size: 12px;
+      line-height: 16px;
+      /* text-align: center; */
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--fg);
+      border-radius: 4px;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    #result {
+      margin-top: 12px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .error { color: #f44336; }
+
+    #history {
+      margin-top: 20px;
+      max-height: 100px;
+      overflow-y: auto;
+      border: 1px solid var(--border);
+      padding: 8px;
+      font-size: 12px;
+      border-radius: 5px;
+    }
+    #history p { margin: 4px 0; }
+  </style>
+</head>
+<body class="light">
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme">Dark</button>
+
+  <div class="converter">
+    <h2>Temperature Converter</h2>
+    <label for="tempInput">Temperature:</label>
+    <input type="number" id="tempInput" step="any" placeholder="Enter value" autofocus aria-label="Temperature input">
+
+    <label for="unitSelect">From:</label>
+    <select id="unitSelect">
+      <option value="celsius">Celsius (°C)</option>
+      <option value="fahrenheit">Fahrenheit (°F)</option>
+      <option value="kelvin">Kelvin (K)</option>
+    </select>
+
+    <label for="outputUnits">To:</label>
+    <select id="outputUnits">
+      <option value="all">All</option>
+      <option value="celsius">Celsius (°C)</option>
+      <option value="fahrenheit">Fahrenheit (°F)</option>
+      <option value="kelvin">Kelvin (K)</option>
+    </select>
+
+    <label for="precision">Decimals:</label>
+    <select id="precision">
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2" selected>2</option>
+      <option value="3">3</option>
+    </select>
+
+    <button onclick="convert()">Convert</button>
+    <button class="clear-btn" onclick="clearForm()">Clear</button>
+
+    <div id="result" aria-live="polite"></div>
+    <div id="history"><strong>Recent:</strong><div id="historyList"></div></div>
+  </div>
+
+  <script>
+    const elements = {
+      body: document.body,
+      tempInput: document.getElementById('tempInput'),
+      unitSelect: document.getElementById('unitSelect'),
+      outputUnits: document.getElementById('outputUnits'),
+      precision: document.getElementById('precision'),
+      result: document.getElementById('result'),
+      historyList: document.getElementById('historyList'),
+      themeButton: document.querySelector('.theme-toggle')
+    };
+
+    const convertMap = {
+      celsius: {
+        celsius: t => t,
+        fahrenheit: t => (t * 9/5) + 32,
+        kelvin: t => t + 273.15
+      },
+      fahrenheit: {
+        celsius: t => (t - 32) * 5/9,
+        fahrenheit: t => t,
+        kelvin: t => (t - 32) * 5/9 + 273.15
+      },
+      kelvin: {
+        celsius: t => t - 273.15,
+        fahrenheit: t => (t - 273.15) * 9/5 + 32,
+        kelvin: t => t
+      }
+    };
+
+    function toggleTheme() {
+      elements.body.classList.toggle('dark');
+      elements.body.classList.toggle('light');
+      const isDark = elements.body.classList.contains('dark');
+      elements.themeButton.textContent = isDark ? 'Light' : 'Dark';
+      localStorage.setItem('theme', elements.body.className);
+    }
+
+    function convert() {
+      const value = parseFloat(elements.tempInput.value.trim());
+      const fromUnit = elements.unitSelect.value;
+      const toUnit = elements.outputUnits.value;
+      const decimals = parseInt(elements.precision.value);
+
+      if (!elements.tempInput.value.trim()) return showError("Please enter a temperature.");
+      if (isNaN(value)) return showError("Invalid number.");
+      if (fromUnit === 'kelvin' && value < 0) return showError("Kelvin cannot be negative.");
+
+      let results = "";
+      const display = u => {
+        const val = convertMap[fromUnit][u](value).toFixed(decimals);
+        const label = u === "celsius" ? "°C" : u === "fahrenheit" ? "°F" : "K";
+        results += `<p>${val} ${label}</p>`;
+      };
+
+      if (toUnit === "all") ["celsius", "fahrenheit", "kelvin"].forEach(display);
+      else display(toUnit);
+
+      elements.result.innerHTML = results;
+      updateHistory(value, fromUnit, results);
+    }
+
+    function showError(msg) {
+      elements.result.innerHTML = `<p class="error">${msg}</p>`;
+    }
+
+    function clearForm() {
+      elements.tempInput.value = '';
+      elements.unitSelect.value = 'celsius';
+      elements.outputUnits.value = 'all';
+      elements.precision.value = '2';
+      elements.result.innerHTML = '';
+    }
+
+    function updateHistory(value, fromUnit, resultHTML) {
+      const history = JSON.parse(localStorage.getItem('conversionHistory') || '[]');
+      history.unshift({
+        timestamp: new Date().toLocaleString(),
+        input: `${value} ${fromUnit}`,
+        output: resultHTML.replace(/<\/?p>/g, '')
+      });
+      if (history.length > 5) history.pop();
+      localStorage.setItem('conversionHistory', JSON.stringify(history));
+      renderHistory();
+    }
+
+    function renderHistory() {
+      const history = JSON.parse(localStorage.getItem('conversionHistory') || '[]');
+      elements.historyList.innerHTML = history
+        .map(h => `<p>${h.timestamp}: ${h.input} → ${h.output}</p>`)
+        .join('');
+      elements.historyList.scrollTop = 0;
+    }
+
+    function restoreTheme() {
+      const theme = localStorage.getItem('theme');
+      if (theme) {
+        elements.body.className = theme;
+        elements.themeButton.textContent = theme.includes('dark') ? 'Light' : 'Dark';
+      }
+    }
+
+    // On load
+    restoreTheme();
+    renderHistory();
+    elements.tempInput.addEventListener('keypress', e => e.key === 'Enter' && convert());
+  </script>
+</body>
+</html>
